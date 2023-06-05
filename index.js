@@ -115,14 +115,14 @@ app.post('/middleware',
             message: error
         })
     }
-    
+
     return next()
 },
 (req, res) => {
     let body = req.body
 
     return res.status(200).json({
-        error: false,
+        error: false, 
         message: ["Hello world"],
     })
 }
