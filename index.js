@@ -7,6 +7,7 @@ const app = express()
 // import routes
 const globalRoutes = require('./routes/globalRoutes')
 const userRoutes = require('./routes/userRoutes')
+const productRoutes = require('./routes/productRoutes')
 
 app.use(bodyParser.json())
 
@@ -15,6 +16,7 @@ app.use('/', globalRoutes);
 // Ici on ajoute 'user' à la route initialement 'middleware' 
 // Les requêtes s'effectueront sur /user/middleware 
 app.use('/user', userRoutes);
+app.use('/product', productRoutes);
 
 // déclenche le serveur sur le port 4000
 app.listen(4000, () => {
