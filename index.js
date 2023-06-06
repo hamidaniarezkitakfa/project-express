@@ -3,26 +3,18 @@ const express = require('express')
 const bodyParser = require('body-parser')
 // appel au package 
 const app = express()
-// import middleware
-const checkUserData = require('./middlewares/checkUserData')
-// import controllers
-const userController = require('./controllers/userController')
-const globalController = require('./controllers/globalController')
 
+// import routes
+const globalRoutes = require('./routes/globalRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 app.use(bodyParser.json())
 
-// première routes en get 
-app.get('/', globalController.getHome)
-
-// mise à jour d'un élément
-app.put('/', globalController.updateElement)
-
-// suppression d'un élément
-app.delete('/', globalController.deleteElement)
-
-// création d'un utilisateur
-app.post('/middleware', checkUserData, userController.createUser)
+// Activation des routes
+app.use('/', globalRoutes);
+// Ici on ajoute 'user' à la route initialement 'middleware' 
+// Les requêtes s'effectueront sur /user/middleware 
+app.use('/user', userRoutes);
 
 // déclenche le serveur sur le port 4000
 app.listen(4000, () => {
