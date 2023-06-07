@@ -6,10 +6,13 @@ const app = express()
 
 // import routes
 const globalRoutes = require('./routes/globalRoutes')
-const userRoutes = require('./routes/userRoutes')
 const productRoutes = require('./routes/productRoutes')
+const userRoutes = require('./routes/userRoutes')
+// auth routes
+const authRoutes = require('./routes/authRoutes')
 
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
 
 // Activation des routes
 app.use('/', globalRoutes);
@@ -17,6 +20,8 @@ app.use('/', globalRoutes);
 // Les requêtes s'effectueront sur /user/middleware 
 app.use('/user', userRoutes);
 app.use('/product', productRoutes);
+// auth routes
+app.use('/auth', authRoutes);
 
 // déclenche le serveur sur le port 4000
 app.listen(4000, () => {
