@@ -1,9 +1,47 @@
 // { } obligatoire ici
 const { faker } = require('@faker-js/faker');
+require('dotenv').config();
+var jwt = require('jsonwebtoken')
+const userModel = require('../model/UserModel')
 
-const createProduct = (req, res) => {
+const createProduct = async(req, res) => {
     const productId = Math.floor(Math.random() * 10000); // Génère un faux ID
-    res.status(200).json({
+
+    const connect = userModel.connection();
+
+
+    const error = await jwt.verify(req.headers.authorization.split(' ')[1], process.env.JWT, async function(err, decoded) {
+        try {
+            // on lui demande de promesse afin de savoir si il va bien renvoyer les données
+            const resultat = await new Promise((resolve, reject) => {
+                let select = "SELECT * FROM user WHERE email = ?;"
+                // si l'execution a bien eu lieu 
+                let result = connect.execute(select,[decoded.email],  function(err, results, fields) {
+                
+                    // si lemail existe déjà on renvoi erreur dans le catch
+                    if (results.length > 0) {
+                        return resolve(results)
+                    }
+                    // sinon il continue son bout de chemin
+                    return reject(true)
+                })
+        
+            })
+            return true
+        } catch (error) {
+           return false
+        } 
+
+    });
+
+    if (!error) {
+        return res.status(409).json({
+            message: 'Utilisateur inconnue',
+        });
+    }
+
+
+    return res.status(200).json({
         message: 'Produit créé avec succès',
         product: {id: productId, ...req.body}
     });

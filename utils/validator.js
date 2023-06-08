@@ -1,6 +1,6 @@
 const Yup = require('yup')
 
-let userSchema = Yup.object({
+let register = Yup.object({
     lastname: Yup.string().required().min(1).max(155),
     firstname: Yup.string().required().min(1).max(155),
     email: Yup.string().required().email().min(1).max(155),
@@ -8,4 +8,13 @@ let userSchema = Yup.object({
     password: Yup.string().required().min(1).max(255),
 });
 
-module.exports = userSchema
+
+let login = Yup.object({
+    email: Yup.string().required().email().min(1).max(155),
+    password: Yup.string().required().min(1).max(255)
+});
+
+module.exports = {
+    register,
+    login
+}
