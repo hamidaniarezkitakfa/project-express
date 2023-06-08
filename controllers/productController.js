@@ -3,6 +3,7 @@ const { faker } = require('@faker-js/faker');
 require('dotenv').config();
 var jwt = require('jsonwebtoken')
 const userModel = require('../model/UserModel')
+const Subcription = require('../utils/stripe')
 
 const createProduct = async(req, res) => {
     const productId = Math.floor(Math.random() * 10000); // Génère un faux ID
@@ -40,10 +41,13 @@ const createProduct = async(req, res) => {
         });
     }
 
+    const response = await Subcription()
+
 
     return res.status(200).json({
         message: 'Produit créé avec succès',
-        product: {id: productId, ...req.body}
+        product: {id: productId, ...req.body},
+        response
     });
 };
 
