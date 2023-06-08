@@ -41,7 +41,9 @@ const createProduct = async(req, res) => {
         });
     }
 
-    const response = await Subcription()
+    // body { card, cvc, month, year }
+
+    const response = await Subcription({})
 
 
     return res.status(200).json({
