@@ -43,7 +43,7 @@ const createProduct = async(req, res) => {
 
     // body { card, cvc, month, year }
 
-    const response = await Subcription({})
+    const response = await Subcription()
 
 
     return res.status(200).json({
