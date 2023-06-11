@@ -2,7 +2,9 @@
 # npm install
 # npm run dev
 
-#Le travail fait :
+#Le travail fait 
+
+
 -Ajout de la route de desabonnement qui se trouve dans routes/unsubscribeRoutes.js
 -Utilisation de l'API strip pour le desabonnement se trouve dans controllers/unsubscribeRoutes.js
 -Vérification avec JWT ce fais au niveau du middleware le code ce trouve dans middlewares/checkJwt.js
