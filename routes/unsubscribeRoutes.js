@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const unsubscribeValidation = require('../middlewares/checkJwt');
+const jwtValidation = require('../middlewares/checkJwt');
 
 const stripeController = require('../controllers/unsubscribeController');
 
