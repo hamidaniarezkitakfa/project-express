@@ -10,8 +10,9 @@ const productRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes')
 // auth routes
 const authRoutes = require('./routes/authRoutes')
-
-// app.use(bodyParser.json())
+const unsubscribeRoutes = require('./routes/unsubscribeRoutes')
+const modifySubscriptionRoutes = require('./routes/modifySubscriptionRoutes')
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
 // Activation des routes
@@ -22,6 +23,28 @@ app.use('/user', userRoutes);
 app.use('/product', productRoutes);
 // auth routes
 app.use('/auth', authRoutes);
+app.use('/unsubscribe', unsubscribeRoutes);
+app.use('/modifySubscription', modifySubscriptionRoutes);
+
+// var mysql      = require("mysql");
+// require('dotenv').config();
+
+
+//     const connection =  mysql.createConnection({
+//         host     : process.env.HOSTNAME,
+//         user     : process.env.DB_USERNAME,
+//         password : process.env.PASSWORD,
+//         database : process.env.DB_NAME
+//     });
+//     connection.connect((err) => {
+//         if(err){
+//             console.error("errere");
+//             return;
+//         }
+//         console.log("connect")
+//     });
+
+
 
 // déclenche le serveur sur le port 4000
 app.listen(4000, () => {

@@ -10,7 +10,6 @@ const createProduct = async(req, res) => {
 
     const connect = userModel.connection();
 
-
     const error = await jwt.verify(req.headers.authorization.split(' ')[1], process.env.JWT, async function(err, decoded) {
         try {
             // on lui demande de promesse afin de savoir si il va bien renvoyer les données

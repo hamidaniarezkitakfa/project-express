@@ -18,7 +18,7 @@ const AuthRegister = async(req, res) => {
             // si l'execution a bien eu lieu 
             let result = connect.execute(select,[body.email],  function(err, results, fields) {
                 // si lemail existe déjà on renvoi erreur dans le catch
-                if (results.length > 0) {
+                if (result.length > 0) {
                     return reject(true)
                 }
                 // sinon il continue son bout de chemin
@@ -72,7 +72,7 @@ const AuthLogin = async(req, res) => {
         if (!await argon2.verify(resultat[0].password, body.password)) {
             return res.status(409).json({
                 error: true,
-                message: ["Password/User incorrecte"]
+                message: [" incorrecte"]
             })
         } 
 
@@ -80,7 +80,7 @@ const AuthLogin = async(req, res) => {
     } catch (error) {
         return res.status(409).json({
             error: true,
-            message: ["Password/User incorrecte"],
+            message: ["Password incorrecte"],
         })
     } 
 
